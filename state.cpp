@@ -12,59 +12,49 @@ State::State()
 }
 
 
-int State::compareCountryName(const State& s1, const State& s2)
+int compareCountryName(const State& s1, const State& s2)
 {
     return strcmp(s1.countryName.c_str(), s2.countryName.c_str());
 }
 
-int State::compareCapitalName(const State& s1, const State& s2)
+int compareCapitalName(const State& s1, const State& s2)
 {
      return strcmp(s1.capitalName.c_str(), s2.capitalName.c_str());
 }
 
-int State::compareLanguage(const State& s1, const State& s2)
+int compareLanguage(const State& s1, const State& s2)
 {
      return strcmp(s1.language.c_str(), s2.language.c_str());
 }
 
-int State::comparePopulation (const State& s1, const State& s2)
+int comparePopulation (const State& s1, const State& s2)
 {
     if (s1.population<s2.population) return -1;
     if(s1.population==s2.population) return 0;
     return 1;
 }
 
-int State::compareTerrritoryArea(const State& s1, const State& s2)
+int compareTerrritoryArea(const State& s1, const State& s2)
 {
     if (s1.territoryArea<s2.territoryArea) return -1;
     if(s1.territoryArea==s2.territoryArea) return 0;
     return 1;
 }
 
-int State::compareMonetaryUnit(const State& s1, const State& s2)
+int compareMonetaryUnit(const State& s1, const State& s2)
 {
     return strcmp(s1.monetaryUnit.c_str(), s2.monetaryUnit.c_str());
 }
 
-int State::comparePoliticalSystem(const State& s1, const State& s2)
+int comparePoliticalSystem(const State& s1, const State& s2)
 {
    return strcmp(s1.politicalSystem.c_str(), s2.politicalSystem.c_str());
 }
 
-
-void State::writeToFile (std::ofstream &ofs, List<State> &list)
-{
-    for (unsigned int i=0;i<list.Len();i++)
-       ofs<<"Capital: "<<list[i].capitalName<<"\nCountry: " <<list[i].countryName<<"\nLanguage: " <<list[i].language<<
-                   "\nMonetary unit: "<<list[i].monetaryUnit<<"\nPolitical system: " <<list[i].politicalSystem<<
-                   "\nPopulation: "<<list[i].population<<"\nArea: "<<list[i].territoryArea<<"\n\n\n";
-}
-
-
-void State::readFromFile (std::ifstream &fs, List<State>& list)
+void State::readFromFile (std::ifstream &fs, Queue<State>& queue)
 {
     std::string s;
-    int i=0, currListIndex=list.Len()-1;
+    int i=0, currQueueIndex=queue.len()-1;
     while (!fs.eof())
     {
        std::getline(fs,s);
@@ -74,39 +64,39 @@ void State::readFromFile (std::ifstream &fs, List<State>& list)
            case 0:
            {
                    State state;
-                   list.add(state);
-                   currListIndex++;
+                   queue.qstore(state);
+                   currQueueIndex++;
 
                    int index = s.find(':')+2;
-                   list[currListIndex].capitalName=s.substr(index, s.length()-index);
+                   queue[currQueueIndex].capitalName=s.substr(index, s.length()-index);
                    i++;
                    break;
            }
            case 1:
            {
                   int index = s.find(':')+2;
-                  list[currListIndex].countryName=s.substr(index, s.length()-index);
+                  queue[currQueueIndex].countryName=s.substr(index, s.length()-index);
                   i++;
                   break;
            }
            case 2:
            {
                   int index = s.find(':')+2;
-                  list[currListIndex].language=s.substr(index, s.length()-index);
+                  queue[currQueueIndex].language=s.substr(index, s.length()-index);
                   i++;
                   break;
            }
            case 3:
            {
                   int index = s.find(':')+2;
-                  list[currListIndex].monetaryUnit=s.substr(index, s.length()-index);
+                  queue[currQueueIndex].monetaryUnit=s.substr(index, s.length()-index);
                   i++;
                   break;
            }
            case 4:
            {
                   int index = s.find(':')+2;
-                  list[currListIndex].politicalSystem=s.substr(index, s.length()-index);
+                  queue[currQueueIndex].politicalSystem=s.substr(index, s.length()-index);
                   i++;
                   break;
            }
@@ -115,7 +105,7 @@ void State::readFromFile (std::ifstream &fs, List<State>& list)
                   std::string curr;
                   int index = s.find(':')+2;
                   curr=s.substr(index, s.length()-index);
-                  list[currListIndex].population=atoi(curr.c_str());
+                  queue[currQueueIndex].population=atoi(curr.c_str());
                   i++;
                   break;
            }
@@ -124,7 +114,7 @@ void State::readFromFile (std::ifstream &fs, List<State>& list)
                   std::string curr;
                   int index = s.find(':')+2;
                   curr=s.substr(index, s.length()-index);
-                  list[currListIndex].territoryArea=std::atof(curr.c_str());
+                  queue[currQueueIndex].territoryArea=std::atof(curr.c_str());
                   i=0;
                   break;
            }
@@ -133,7 +123,8 @@ void State::readFromFile (std::ifstream &fs, List<State>& list)
 }
 
 
-void State::readFromKeyboard(List<State>&list)
+
+void State::readFromKeyboard(Queue<State>&queue)
 {
      std::string s=" ";
      std::cout <<"Input capital name, country name, language, monetary unit, political system, population and area."
@@ -173,7 +164,7 @@ void State::readFromKeyboard(List<State>&list)
             floatStream>> state.territoryArea;
         }
 
-        list.add(state);
+        queue.qstore(state);
    }
 
 }

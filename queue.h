@@ -13,7 +13,10 @@ public:
     void qstore (T  element);
     T qretrieve();
     T& getElement (int index);
+    inline T& operator [] (int index){return getElement(index);}
     void printQueue(std::ostream& oStream, void(*printFunc)(std::ostream& os, const T& value));
+
+    inline int len(){return _queue.Len();}
 
     Queue(int len);
     ~Queue();
