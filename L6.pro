@@ -11,8 +11,18 @@ QT       -= gui
 TARGET = L6
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG += C++11
 
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    nullelementexception.cpp \
+    state.cpp
+
+HEADERS += \
+    list.h \
+    node.h \
+    nullelementexception.h \
+    state.h \
+    queue.h
