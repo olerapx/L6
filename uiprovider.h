@@ -15,6 +15,18 @@ enum UserAction
     ACTION_QUIT
 };
 
+//State class fields
+enum
+{
+    FIELD_COUNTRY_NAME=1,
+    FIELD_CAPITAL_NAME,
+    FIELD_LANGUAGE,
+    FIELD_POPULATION,
+    FIELD_AREA,
+    FIELD_UNIT,
+    FIELD_SYSTEM
+};
+
 static std::map <char, UserAction> Commands{{'h',ACTION_HELP}, {'s',ACTION_QSTORE},{'r',ACTION_QRETRIEVE},
                                             {'g',ACTION_GET},{'p',ACTION_PRINT},{'q',ACTION_QUIT}};
 class UIProvider

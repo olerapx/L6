@@ -9,7 +9,7 @@ template <typename T>
 class List
 {
 private:
-    unsigned int len;
+    int len;
     Node<T> * first;
     Node<T> * last;
     //for delete and insert operations
@@ -35,7 +35,7 @@ public:
 
   bool isExists (const T& value);
   inline bool isEmpty(){ return (len==0);}
-  inline unsigned int Len(){return len;}
+  inline int Len(){return len;}
 
   //sorts list using compare function. if you want to sort in increasing,
   //function must return >0 if first operand is bigger than second and <0 if second is bigger than first

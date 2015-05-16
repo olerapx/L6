@@ -5,12 +5,13 @@
 template <typename T>
 class Queue
 {
-protected:
+private:
     List<T> _queue;
-    int lastIndex;
 
 public:
     void qstore (const T &element);
+    inline void operator << (const T& element) {qstore(element);}
+
     T qretrieve();
     T& getElement (int index);
     inline T& operator [] (int index){return getElement(index);}
@@ -18,17 +19,10 @@ public:
 
     inline int len(){return _queue.Len();}
 
-    Queue();
     ~Queue();
 };
 
 
-
-template<typename T>
-Queue<T>::Queue()
-{
-  lastIndex=-1;
-}
 
 template<typename T>
 Queue<T>::~Queue()
@@ -40,7 +34,7 @@ template<typename T>
 void Queue<T>::qstore(const T& element)
 {
     _queue.add(element);
-    lastIndex++;
+
 }
 
 template<typename T>
@@ -61,13 +55,9 @@ T Queue<T>::qretrieve()
 template <typename T>
 T& Queue<T>::getElement (int index)
 {
-    try
-    {
        if (index<0|| index>_queue.Len()-1) throw std::out_of_range("Incorrect index");
 
        return _queue[index];
-    }
-    catch(std::out_of_range){ }
 }
 
 template <typename T>

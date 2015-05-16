@@ -74,23 +74,97 @@ void UIProvider::handleRetrieveAction(Queue<State> &queue)
 
 void UIProvider::handleGetAction(Queue<State>&queue)
 {
-  std::cout <<"Input index\n";
-   char s=std::cin.get();
-   clearStream();
+    State*state;
 
-   std::cout <<"Input index:\n";
-   int index;
-   std::cin>>index;
+    std::cout <<"Input index:\n";
+    int index;
+    std::cin>>index;
+    try
+    {
+      state=&queue.getElement(index);
+    }
+      catch (std::out_of_range e)
+    {
+        std::cout<<e.what()<<"\n";
+        return;
+    }
+        printState(std::cout, *state);
 
-   State state=queue.getElement(index);
+ char e='y';
 
 
-    std::cout<<state.capitalName<<"\n" <<state.countryName<<"\nLanguage: " <<state.language<<
-                "\nMonetary unit: "<<state.monetaryUnit<<"\nPolitical system: " <<state.politicalSystem<<
-                "\nPopulation: "<<state.population<<"\nArea: "<<state.territoryArea<<"\n\n\n";
+ while (e=='y')
+ {
+    std::cout<<"Do you want to edit? y/n \n";
+
+    std::cin>>e;
+    clearStream();
+
+    if (e!='y') return;
+
+    std::cout <<"Input:\n"
+                  "1 to edit name\n"
+                  "2 to edit capital name\n"
+                  "3 to edit language\n"
+                  "4 to edit population\n"
+                  "5 to edit area\n"
+                  "6 to edit monetary unit\n"
+                  "7 to edit system\n";
+
+     char s=std::cin.get();
+      clearStream();
+
+      std::cout <<"Input new field value\n";
+      std::string str=" ";
+      std::cin>>str;
+      clearStream();
+
+      if (str=="")
+      {
+          std::cout <<"No value was inputted. Abort\n";
+          continue;
+      }
+      switch(s-'0')
+      {
+             case FIELD_COUNTRY_NAME:
+                 state->countryName=str;
+                 break;
+
+            case FIELD_CAPITAL_NAME:
+                 state->capitalName=str;
+                 break;
+
+            case FIELD_LANGUAGE:
+                 state->language=str;
+                 break;
+
+            case FIELD_POPULATION:
+            {
+                 std::stringstream intStream(str);
+                 intStream>> state->population;
+                 break;
+            }
+            case FIELD_AREA:
+            {
+                 std::stringstream floatStream(str);
+                 floatStream>> state->territoryArea;
+                 break;
+            }
+            case FIELD_UNIT:
+                 state->monetaryUnit=str;
+                 break;
+
+            case FIELD_SYSTEM:
+                 state->politicalSystem=str;
+                 break;
+
+            default:
+                 std::cout <<"Wrong field\n";
+                 return;
+         }
+      std::cout <<"Successfully changed\n";
+    }
 }
-
-
 
 void UIProvider::handlePrintAction(Queue<State>&queue)
 {
@@ -108,5 +182,3 @@ void UIProvider::handleHelp()
                 "p to print queue\n"
                 "q to quit\n";
 }
-
-
