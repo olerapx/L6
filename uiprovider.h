@@ -27,6 +27,9 @@ enum
     FIELD_SYSTEM
 };
 
+
+
+
 static std::map <char, UserAction> Commands{{'h',ACTION_HELP}, {'s',ACTION_QSTORE},{'r',ACTION_QRETRIEVE},
                                             {'g',ACTION_GET},{'p',ACTION_PRINT},{'q',ACTION_QUIT}};
 class UIProvider
@@ -42,6 +45,13 @@ class UIProvider
    static void handleGetAction( Queue<State>&queue);
    static void handlePrintAction( Queue<State>&queue);
    static void handleReadAction(Queue<State>& queue);
+
+  static void writeToFile (std::ofstream &ofs, Queue<State>& queue);
+  static void readFromFile (std::ifstream &ifs, Queue<State>& queue);
+  static void readFromFile(Queue<State>&queue);
+  static void readFromKeyboard(Queue<State>&queue);
+
+  static void printState (std::ostream& os,const State & state);
 
 public:
 
