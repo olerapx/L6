@@ -94,7 +94,7 @@ void UIProvider::handleGetAction(Queue<State>&queue)
 
 void UIProvider::handlePrintAction(Queue<State>&queue)
 {
-    printQueue(queue);
+  queue.printQueue(std::cout, printState);
 }
 
 
@@ -109,10 +109,4 @@ void UIProvider::handleHelp()
                 "q to quit\n";
 }
 
-void UIProvider::printQueue(Queue<State>& queue)
-{
-    for (unsigned int i=0;i<queue.len();i++)
-       std::cout<<"Capital name: "<<queue[i].capitalName<<"\nCountry name: " <<queue[i].countryName<<"\nLanguage: " <<queue[i].language<<
-                   "\nMonetary unit: "<<queue[i].monetaryUnit<<"\nPolitical system: " <<queue[i].politicalSystem<<
-                   "\nPopulation: "<<queue[i].population<<"\nArea: "<<queue[i].territoryArea<<"\n\n\n";
-}
+

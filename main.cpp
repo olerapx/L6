@@ -9,7 +9,7 @@ void printInt (std::ostream& os,const int& i)
 
 int main(int argc, char *argv[])
 {
-    Queue<State>queue(100);
+    Queue<State>queue;
     UIProvider::handleUserInput(queue);
 
     return 0;

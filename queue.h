@@ -7,10 +7,10 @@ class Queue
 {
 protected:
     List<T> _queue;
-    int lastIndex, maxLen;
+    int lastIndex;
 
 public:
-    void qstore (T  element);
+    void qstore (const T &element);
     T qretrieve();
     T& getElement (int index);
     inline T& operator [] (int index){return getElement(index);}
@@ -18,16 +18,16 @@ public:
 
     inline int len(){return _queue.Len();}
 
-    Queue(int len);
+    Queue();
     ~Queue();
 };
 
 
 
 template<typename T>
-Queue<T>::Queue(int len)
+Queue<T>::Queue()
 {
-    maxLen=len;
+  lastIndex=-1;
 }
 
 template<typename T>
@@ -37,10 +37,8 @@ Queue<T>::~Queue()
 }
 
 template<typename T>
-void Queue<T>::qstore(T element)
+void Queue<T>::qstore(const T& element)
 {
-    if (_queue.Len()==maxLen) return;
-
     _queue.add(element);
     lastIndex++;
 }
@@ -59,6 +57,7 @@ T Queue<T>::qretrieve()
     }
     catch(std::out_of_range){}
 }
+
 template <typename T>
 T& Queue<T>::getElement (int index)
 {

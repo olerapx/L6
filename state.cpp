@@ -51,6 +51,14 @@ int comparePoliticalSystem(const State& s1, const State& s2)
    return strcmp(s1.politicalSystem.c_str(), s2.politicalSystem.c_str());
 }
 
+void printState (std::ostream& os,const State & state)
+{
+    os<<"Capital name: "<<state.capitalName<<"\nCountry name: " <<state.countryName<<"\nLanguage: " <<state.language<<
+                "\nMonetary unit: "<<state.monetaryUnit<<"\nPolitical system: " <<state.politicalSystem<<
+                "\nPopulation: "<<state.population<<"\nArea: "<<state.territoryArea<<"\n\n\n";
+}
+
+
 void State::readFromFile (std::ifstream &fs, Queue<State>& queue)
 {
     std::string s;

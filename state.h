@@ -20,7 +20,7 @@ public:
 
    static void writeToFile (std::ofstream &ofs, Queue<State>& queue);
    static void readFromFile (std::ifstream &ifs, Queue<State>& queue);
-    static void readFromFile(Queue<State>&queue);
+   static void readFromFile(Queue<State>&queue);
    static void readFromKeyboard(Queue<State>&queue);
 
     State();
@@ -36,7 +36,7 @@ int compareMonetaryUnit(const State& s1, const State& s2);
 int comparePoliticalSystem(const State& s1, const State& s2);
 
 
-
+void printState (std::ostream& os,const State & state);
 
 
 #endif // STATE_H
