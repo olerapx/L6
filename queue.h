@@ -34,30 +34,24 @@ template<typename T>
 void Queue<T>::qstore(const T& element)
 {
     _queue.add(element);
-
 }
 
 template<typename T>
 T Queue<T>::qretrieve()
 {
-    try
-    {
-        if (_queue.Len()==0) throw std::out_of_range("Queue is empty");
+    if (_queue.Len()==0) throw std::out_of_range("Queue is empty");
 
-        T temp=_queue.at(0);
-        _queue.removeAt(0);
+    T temp=_queue.at(0);
+    _queue.removeAt(0);
 
-        return temp;
-    }
-    catch(std::out_of_range){}
+    return temp;
 }
 
 template <typename T>
 T& Queue<T>::getElement (int index)
 {
-       if (index<0|| index>_queue.Len()-1) throw std::out_of_range("Incorrect index");
-
-       return _queue[index];
+    if (index<0|| index>_queue.Len()-1) throw std::out_of_range("Incorrect index");
+    return _queue[index];
 }
 
 template <typename T>

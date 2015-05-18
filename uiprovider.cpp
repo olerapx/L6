@@ -74,21 +74,17 @@ void UIProvider::handleRetrieveAction(Queue<State> &queue)
 
 void UIProvider::handleGetAction(Queue<State>&queue)
 {
-    State*state;
-
+    State state;
     std::cout <<"Input index:\n";
     int index;
     std::cin>>index;
+
     try
     {
-      state=&queue.getElement(index);
+           state=queue.getElement(index);
     }
-      catch (std::out_of_range e)
-    {
-        std::cout<<e.what()<<"\n";
-        return;
-    }
-        printState(std::cout, *state);
+    catch(std::out_of_range){}
+    printState(std::cout, state);
 
  char e='y';
 
@@ -112,57 +108,57 @@ void UIProvider::handleGetAction(Queue<State>&queue)
                   "7 to edit system\n";
 
      char s=std::cin.get();
-      clearStream();
+     clearStream();
 
-      std::cout <<"Input new field value\n";
-      std::string str=" ";
-      std::cin>>str;
-      clearStream();
+     std::cout <<"Input new field value\n";
+     std::string str=" ";
+     std::cin>>str;
+     clearStream();
 
-      if (str=="")
-      {
-          std::cout <<"No value was inputted. Abort\n";
-          continue;
-      }
-      switch(s-'0')
-      {
-             case FIELD_COUNTRY_NAME:
-                 state->countryName=str;
-                 break;
+     if (str=="")
+     {
+         std::cout <<"No value was inputted. Abort\n";
+         continue;
+     }
+     switch(s-'0')
+     {
+            case FIELD_COUNTRY_NAME:
+                state.countryName=str;
+                break;
 
-            case FIELD_CAPITAL_NAME:
-                 state->capitalName=str;
-                 break;
+           case FIELD_CAPITAL_NAME:
+               state.capitalName=str;
+                break;
 
-            case FIELD_LANGUAGE:
-                 state->language=str;
-                 break;
+           case FIELD_LANGUAGE:
+                state.language=str;
+                break;
 
-            case FIELD_POPULATION:
-            {
-                 std::stringstream intStream(str);
-                 intStream>> state->population;
-                 break;
-            }
-            case FIELD_AREA:
-            {
-                 std::stringstream floatStream(str);
-                 floatStream>> state->territoryArea;
-                 break;
-            }
-            case FIELD_UNIT:
-                 state->monetaryUnit=str;
-                 break;
+           case FIELD_POPULATION:
+           {
+                std::stringstream intStream(str);
+                intStream>> state.population;
+                break;
+           }
+           case FIELD_AREA:
+           {
+                std::stringstream floatStream(str);
+                floatStream>> state.territoryArea;
+                break;
+           }
+           case FIELD_UNIT:
+                state.monetaryUnit=str;
+                break;
 
-            case FIELD_SYSTEM:
-                 state->politicalSystem=str;
-                 break;
+           case FIELD_SYSTEM:
+                state.politicalSystem=str;
+                break;
 
-            default:
-                 std::cout <<"Wrong field\n";
-                 return;
-         }
-      std::cout <<"Successfully changed\n";
+           default:
+                std::cout <<"Wrong field\n";
+                return;
+        }
+     std::cout <<"Successfully changed\n";
     }
 }
 
@@ -269,7 +265,7 @@ void UIProvider::readFromKeyboard(Queue<State>&queue)
      std::cout <<"Input capital name, country name, language, monetary unit, political system, population and area."
                  "Each field must delim by tabulation. Input empty string to finish.\n";
 
-    //clear console istream to read correctly
+     //clear console istream to read correctly
      std::cin.clear();
 
      while (true)

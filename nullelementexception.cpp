@@ -6,7 +6,7 @@ NullElementException::NullElementException()
 }
 
 
-  NullElementException::NullElementException (std::string errorText)
-  {
-      error=errorText;
-  }
+NullElementException::NullElementException (std::string errorText)
+{
+    error=errorText;
+}

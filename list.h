@@ -50,7 +50,6 @@ public:
 };
 
 
-
 template<typename T>
 List<T>::List()
 {
@@ -144,9 +143,7 @@ int List<T>::indexOf(const T &value)
 
 template<typename T>
 T &List<T>::at(int index)
-{
-    try
-    {
+{ 
         if (len==0 || index<0 || index>=len) throw std::out_of_range("Incorrect index");
 
         Node<T>* currNode=first;
@@ -154,8 +151,6 @@ T &List<T>::at(int index)
             currNode=currNode->next;
 
         return currNode->value;
-    }
-    catch (std::out_of_range){}
 }
 
 
@@ -287,7 +282,6 @@ void List<T>::deleteNode (Node<T>* node)
         if (comparison(at(i), value)==0) return at(i);
 
     throw NullElementException();
-
  }
 
 

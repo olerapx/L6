@@ -1,13 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
-#include <string>
 #include <cstring>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
 #include "queue.h"
-
 
 class State
 {
@@ -17,7 +11,6 @@ public:
     int population;
     float territoryArea;
     std::string monetaryUnit, politicalSystem; 
-
 
     State();
 };
